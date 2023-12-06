@@ -28,7 +28,7 @@ Before you begin, ensure you have met the following requirements:
 2. Change into the project directory:
    
      ```bash
-   git clone https://github.com/your-username/alphaconsole.git
+   cd alphaconsole
 
 3. Install dependencies:
 
