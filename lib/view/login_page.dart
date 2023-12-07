@@ -1,11 +1,8 @@
-import 'package:alphaconsole/constants/constant.dart';
 import 'package:alphaconsole/cubit/cubit/user_cubit.dart';
-import 'package:alphaconsole/view/home_page.dart';
-import 'package:alphaconsole/view/not_found_page.dart';
 import 'package:art_sweetalert/art_sweetalert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hexcolor/hexcolor.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 // ignore: must_be_immutable
 class LoginPage extends StatefulWidget {
@@ -19,6 +16,9 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
 
   TextEditingController passwordController = TextEditingController();
+
+  final RoundedLoadingButtonController _btnController =
+      RoundedLoadingButtonController();
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -82,8 +82,10 @@ class _LoginPageState extends State<LoginPage> {
                       TextFormField(
                         keyboardType: TextInputType.emailAddress,
                         controller: emailController,
+                        style: const TextStyle(color: Colors.white),
                         decoration: const InputDecoration(
                           hintText: 'Email',
+                          hintStyle: TextStyle(color: Colors.white),
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -102,8 +104,10 @@ class _LoginPageState extends State<LoginPage> {
                       TextFormField(
                         controller: passwordController,
                         obscureText: true,
+                        style: const TextStyle(color: Colors.white),
                         decoration: const InputDecoration(
                           hintText: 'Password',
+                          hintStyle: TextStyle(color: Colors.white),
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -122,62 +126,60 @@ class _LoginPageState extends State<LoginPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Material(
-                            borderRadius: BorderRadius.circular(10),
-                            color: HexColor(Constant.primaryColor),
-                            child: InkWell(
-                              onTap: () {
-                                if (formKey.currentState!.validate()) {
-                                  // show loading
-                                  context
-                                      .read<UserCubit>()
-                                      .login(
-                                        email: emailController.text,
-                                        password: passwordController.text,
+                          RoundedLoadingButton(
+                            controller: _btnController,
+                            onPressed: () {
+                              if (formKey.currentState!.validate()) {
+                                context
+                                    .read<UserCubit>()
+                                    .login(
+                                      email: emailController.text,
+                                      password: passwordController.text,
+                                      context: context,
+                                    )
+                                    .then((value) {
+                                  if (value[0]) {
+                                    // show snackbar
+                                    Navigator.pushReplacementNamed(
+                                      context,
+                                      '/home',
+                                    );
+                                    ArtSweetAlert.show(
                                         context: context,
-                                      )
-                                      .then((value) {
-                                    if (value[0]) {
-                                      // show snackbar
-                                      Navigator.pushReplacementNamed(
-                                        context,
-                                        '/home',
-                                      );
-                                      ArtSweetAlert.show(
-                                          context: context,
-                                          artDialogArgs: ArtDialogArgs(
-                                            type: ArtSweetAlertType.success,
-                                            title: "Berhasil",
-                                            text: value[1],
-                                          ));
-                                    } else {
-                                      // show snackbar
-                                      ArtSweetAlert.show(
-                                          context: context,
-                                          artDialogArgs: ArtDialogArgs(
-                                            type: ArtSweetAlertType.danger,
-                                            title: "Gagal",
-                                            text: value[1],
-                                          ));
-                                    }
-                                    // clear text field
-                                    emailController.clear();
-                                    passwordController.clear();
-                                  });
-                                }
-                              },
-                              child: const SizedBox(
-                                width: 200,
-                                height: 50,
-                                child: Center(
-                                  child: Text(
-                                    'Login',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
+                                        artDialogArgs: ArtDialogArgs(
+                                          type: ArtSweetAlertType.success,
+                                          title: "Berhasil",
+                                          text: value[1],
+                                        ));
+                                  } else {
+                                    // show snackbar
+                                    ArtSweetAlert.show(
+                                      context: context,
+                                      artDialogArgs: ArtDialogArgs(
+                                        type: ArtSweetAlertType.danger,
+                                        title: "Gagal",
+                                        text: value[1],
+                                      ),
+                                    );
+                                  }
+                                  // clear text field
+                                  emailController.clear();
+                                  passwordController.clear();
+                                  // show button again
+                                  _btnController.reset();
+                                });
+                              } else {
+                                // show button again
+                                _btnController.reset();
+                              }
+                            },
+                            child: const Center(
+                              child: Text(
+                                'Login',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
@@ -191,9 +193,11 @@ class _LoginPageState extends State<LoginPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
+                          const Text(
                             'Dont Have An Account Yet ?',
-                            style: Theme.of(context).textTheme.bodyLarge,
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
                           ),
                           const SizedBox(
                             width: 10,

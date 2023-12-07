@@ -1,4 +1,4 @@
-import 'package:alphaconsole/view/home_page.dart';
+import 'package:alphaconsole/view/app_page.dart';
 import 'package:alphaconsole/view/login_page.dart';
 import 'package:alphaconsole/view/not_found_page.dart';
 import 'package:alphaconsole/view/register_page.dart';
@@ -21,7 +21,7 @@ class MyRoute {
         );
       case "/home":
         return MaterialPageRoute(
-          builder: (context) => const HomePage(),
+          builder: (context) => const AppPage(),
         );
       default:
         return MaterialPageRoute(

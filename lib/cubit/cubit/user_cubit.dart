@@ -2,7 +2,6 @@ import 'package:alphaconsole/constants/constant.dart';
 import 'package:alphaconsole/cubit/state/user_state.dart';
 import 'package:alphaconsole/interceptor/dio_interceptor.dart';
 import 'package:alphaconsole/models/user_model.dart';
-import 'package:alphaconsole/view/not_found_page.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
