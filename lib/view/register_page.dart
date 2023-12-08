@@ -30,8 +30,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    // get jwt from shared preferences
-
     return Scaffold(
         body: Container(
       decoration: const BoxDecoration(

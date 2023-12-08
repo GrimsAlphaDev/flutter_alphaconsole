@@ -30,8 +30,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    // get jwt from shared preferences
-
     return Scaffold(
         body: Container(
       decoration: const BoxDecoration(
@@ -142,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                                     // show snackbar
                                     Navigator.pushReplacementNamed(
                                       context,
-                                      '/home',
+                                      '/app',
                                     );
                                     ArtSweetAlert.show(
                                         context: context,

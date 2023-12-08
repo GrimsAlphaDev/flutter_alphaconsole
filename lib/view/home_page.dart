@@ -103,7 +103,6 @@ class _HomePageState extends State<HomePage> {
                                 "Xbox",
                                 style: TextStyle(
                                   fontSize: 12,
-                                  color: Colors.black,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -120,7 +119,6 @@ class _HomePageState extends State<HomePage> {
                                 "Nintendo",
                                 style: TextStyle(
                                   fontSize: 12,
-                                  color: Colors.black,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),

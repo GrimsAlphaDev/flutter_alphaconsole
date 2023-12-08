@@ -1,6 +1,8 @@
 import 'package:alphaconsole/view/app_page.dart';
+import 'package:alphaconsole/view/home_page.dart';
 import 'package:alphaconsole/view/login_page.dart';
 import 'package:alphaconsole/view/not_found_page.dart';
+import 'package:alphaconsole/view/profile_page.dart';
 import 'package:alphaconsole/view/register_page.dart';
 import 'package:flutter/material.dart';
 
@@ -11,9 +13,9 @@ class MyRoute {
         return MaterialPageRoute(
           builder: (context) => const LoginPage(),
         );
-      case "/login":
+      case "/app":
         return MaterialPageRoute(
-          builder: (context) => const LoginPage(),
+          builder: (context) => const AppPage(),
         );
       case "/register":
         return MaterialPageRoute(
@@ -21,7 +23,11 @@ class MyRoute {
         );
       case "/home":
         return MaterialPageRoute(
-          builder: (context) => const AppPage(),
+          builder: (context) => const HomePage(),
+        );
+      case "/profile":
+        return MaterialPageRoute(
+          builder: (context) => const ProfilePage(),
         );
       default:
         return MaterialPageRoute(
