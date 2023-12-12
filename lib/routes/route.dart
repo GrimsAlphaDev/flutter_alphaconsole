@@ -11,11 +11,11 @@ class MyRoute {
     switch (settings.name) {
       case "/":
         return MaterialPageRoute(
-          builder: (context) => const LoginPage(),
-        );
-      case "/app":
-        return MaterialPageRoute(
           builder: (context) => const AppPage(),
+        );
+      case "/login":
+        return MaterialPageRoute(
+          builder: (context) => const LoginPage(),
         );
       case "/register":
         return MaterialPageRoute(

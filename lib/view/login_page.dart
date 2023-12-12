@@ -24,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
-    context.read<UserCubit>().checkLogin(context);
+    // context.read<UserCubit>().checkLogin(context);
     super.initState();
   }
 
@@ -140,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                                     // show snackbar
                                     Navigator.pushReplacementNamed(
                                       context,
-                                      '/app',
+                                      '/',
                                     );
                                     ArtSweetAlert.show(
                                         context: context,

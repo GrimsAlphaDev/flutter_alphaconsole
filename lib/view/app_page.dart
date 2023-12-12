@@ -1,9 +1,11 @@
 import 'package:alphaconsole/cubit/cubit/pages_cubit.dart';
 import 'package:alphaconsole/cubit/cubit/theme_cubit.dart';
+import 'package:alphaconsole/cubit/cubit/user_cubit.dart';
 import 'package:alphaconsole/view/cart_page.dart';
 import 'package:alphaconsole/view/favorite_page.dart';
 import 'package:alphaconsole/view/home_page.dart';
 import 'package:animated_icon_button/animated_icon_button.dart';
+import 'package:art_sweetalert/art_sweetalert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,7 +24,34 @@ class _AppPageState extends State<AppPage> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    checkLoginAndRedirect();
+  }
+
+  Future<void> checkLoginAndRedirect() async {
+    // Replace "your_check_login_function" with the actual function to check login
+    bool isLoggedIn = await context.read<UserCubit>().checkLogin();
+
+    if (!isLoggedIn) {
+      // show alertdialog if user is not logged in
+      // ignore: use_build_context_synchronously
+      Navigator.pushReplacementNamed(context, "/login");
+      // ignore: use_build_context_synchronously
+      ArtSweetAlert.show(
+        context: context,
+        artDialogArgs: ArtDialogArgs(
+          type: ArtSweetAlertType.info,
+          title: "Silahkan Login",
+          text: "Anda harus login terlebih dahulu untuk melanjutkan",
+        ),
+      );
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    // return future builder to check if user is logged in or not from checklogin function, if the function return true then go to home page else go to login page
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(

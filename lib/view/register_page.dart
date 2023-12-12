@@ -24,7 +24,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   void initState() {
-    context.read<UserCubit>().checkLogin(context);
+    // context.read<UserCubit>().checkLogin(context);
     super.initState();
   }
 
@@ -86,7 +86,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           if (value!.isEmpty) {
                             return 'Please enter your username';
                           }
-                          if (value.length <= 4) {
+                          if (value.length <= 3) {
                             return 'Username must be at least 4 characters';
                           }
                           return null;
@@ -158,7 +158,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   if (value[0]) {
                                     Navigator.pushReplacementNamed(
                                       context,
-                                      '/home',
+                                      '/login',
                                     );
                                     ArtSweetAlert.show(
                                         context: context,
@@ -191,7 +191,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             },
                             child: const Center(
                               child: Text(
-                                'Login',
+                                'Register',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 20,
