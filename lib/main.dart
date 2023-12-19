@@ -1,4 +1,9 @@
+import 'package:alphaconsole/cubit/cubit/brand_cubit.dart';
+import 'package:alphaconsole/cubit/cubit/cart_cubit.dart';
+import 'package:alphaconsole/cubit/cubit/detail_cubit.dart';
 import 'package:alphaconsole/cubit/cubit/pages_cubit.dart';
+import 'package:alphaconsole/cubit/cubit/popular_console_cubit.dart';
+import 'package:alphaconsole/cubit/cubit/recent_console_cubit.dart';
 import 'package:alphaconsole/cubit/cubit/theme_cubit.dart';
 import 'package:alphaconsole/cubit/cubit/user_cubit.dart';
 import 'package:alphaconsole/routes/route.dart';
@@ -17,6 +22,21 @@ void main() {
         ),
         BlocProvider(
           create: (context) => PagesCubit(),
+        ),
+        BlocProvider(
+          create: (context) => BrandCubit(),
+        ),
+        BlocProvider(
+          create: (context) => RecentConsoleCubit(),
+        ),
+        BlocProvider(
+          create: (context) => PopularConsoleCubit(),
+        ),
+        BlocProvider(
+          create: (context) => DetailConsoleCubit(),
+        ),
+        BlocProvider(
+          create: (context) => CartCubit(),
         ),
       ],
       child: const MyApp(),

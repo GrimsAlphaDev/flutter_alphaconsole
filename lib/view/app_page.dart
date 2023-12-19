@@ -2,8 +2,8 @@ import 'package:alphaconsole/cubit/cubit/pages_cubit.dart';
 import 'package:alphaconsole/cubit/cubit/theme_cubit.dart';
 import 'package:alphaconsole/cubit/cubit/user_cubit.dart';
 import 'package:alphaconsole/view/cart_page.dart';
-import 'package:alphaconsole/view/favorite_page.dart';
 import 'package:alphaconsole/view/home_page.dart';
+import 'package:alphaconsole/view/profile_page.dart';
 import 'package:animated_icon_button/animated_icon_button.dart';
 import 'package:art_sweetalert/art_sweetalert.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,7 @@ class _AppPageState extends State<AppPage> {
   List<Widget> pages = [
     const HomePage(),
     const CartPage(),
-    const FavoritePage(),
+    const ProfilePage(),
   ];
 
   @override
@@ -30,11 +30,9 @@ class _AppPageState extends State<AppPage> {
   }
 
   Future<void> checkLoginAndRedirect() async {
-    // Replace "your_check_login_function" with the actual function to check login
     bool isLoggedIn = await context.read<UserCubit>().checkLogin();
 
     if (!isLoggedIn) {
-      // show alertdialog if user is not logged in
       // ignore: use_build_context_synchronously
       Navigator.pushReplacementNamed(context, "/login");
       // ignore: use_build_context_synchronously
@@ -51,9 +49,10 @@ class _AppPageState extends State<AppPage> {
 
   @override
   Widget build(BuildContext context) {
-    // return future builder to check if user is logged in or not from checklogin function, if the function return true then go to home page else go to login page
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     return SafeArea(
       child: Scaffold(
+        key: scaffoldKey,
         appBar: AppBar(
           title: const Text("Alpha Console",
               style:
@@ -78,7 +77,7 @@ class _AppPageState extends State<AppPage> {
             ),
             InkWell(
               onTap: () {
-                Navigator.pushNamed(context, "/profile");
+                context.read<PagesCubit>().changePage(2);
               },
               child: const CircleAvatar(
                 radius: 20,
@@ -106,8 +105,8 @@ class _AppPageState extends State<AppPage> {
               label: "Cart",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.favorite),
-              label: "Favorite",
+              icon: Icon(Icons.person),
+              label: "Profile",
             ),
           ],
         ),
